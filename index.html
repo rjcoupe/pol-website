@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Proof of Life — Mobile Cocktail Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;1,200;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root {
+    --navy:    #0E1B2E;
+    --navy-hi: #16304F;
+    --navy-lo: #0A1422;
+    --cream:   #F4EAD5;
+    --ground:  #FAF4E7;   /* main light ground */
+    --ground-2:#F2E7CF;   /* alternating warmer cream */
+    --ink:     #15263C;   /* primary text on light */
+    --ink-2:   rgba(21,38,60,0.66);
+    --ink-3:   rgba(21,38,60,0.44);
+    --line:    rgba(21,38,60,0.14);
+    --line-2:  rgba(21,38,60,0.08);
+    --magenta: #E83F8C;
+    --magenta-deep: #D6357E;
+    --maxw: 1180px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: 'Jost', sans-serif; font-weight: 300;
+    -webkit-font-smoothing: antialiased; line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 { font-weight: 200; margin: 0; line-height: 1.08; letter-spacing: 0.01em; }
+  p { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+  .kicker {
+    font-family: 'DM Mono', monospace; color: var(--magenta-deep);
+    font-size: 12px; letter-spacing: 0.42em; text-transform: uppercase;
+    display: inline-block;
+  }
+  .eyebrow {
+    font-family: 'DM Mono', monospace; color: var(--ink-3);
+    font-size: 11px; letter-spacing: 0.34em; text-transform: uppercase;
+  }
+  .lead { color: var(--ink-2); font-size: clamp(17px, 1.6vw, 20px); font-weight: 300; max-width: 56ch; }
+
+  /* ── slash motif (the % between proof's O's) ───────────────── */
+  .pol-oo { position: relative; display: inline-flex; gap: 0.16em; vertical-align: baseline; }
+  .pol-oo::after {
+    content: ''; position: absolute; left: 50%; top: 8%; height: 84%;
+    width: 1.5px; background: var(--magenta);
+    transform: translateX(-50%) rotate(20deg); transform-origin: center;
+    opacity: 0.95;
+  }
+
+  /* ── nav ───────────────────────────────────────────────────── */
+  header.nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    transition: background .35s ease, border-color .35s ease, backdrop-filter .35s ease;
+    border-bottom: 1px solid transparent;
+  }
+  header.nav.scrolled {
+    background: rgba(250,244,231,0.82); backdrop-filter: blur(14px) saturate(1.2);
+    border-bottom-color: var(--line);
+  }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+  .brand { display: flex; align-items: baseline; gap: 12px; }
+  .brand .mono-mark {
+    font-weight: 200; font-size: 25px; letter-spacing: 0.12em; padding-left: 0.12em; color: var(--ink);
+  }
+  .brand .mono-mark .a { color: var(--magenta); }
+  .brand .tag { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
+  .nav-links { display: flex; align-items: center; gap: 34px; }
+  .nav-links a.link {
+    font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink-2); transition: color .2s; white-space: nowrap;
+  }
+  .nav-links a.link:hover { color: var(--ink); }
+
+  .btn {
+    font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink);
+    border: 1px solid var(--magenta); border-radius: 999px;
+    padding: 12px 22px; display: inline-flex; align-items: center; gap: 10px;
+    transition: background .25s, color .25s, transform .25s; white-space: nowrap;
+    cursor: pointer; background: transparent;
+  }
+  .btn:hover { background: var(--magenta); color: #fff; transform: translateY(-1px); }
+  .btn.solid { background: var(--magenta); color: #fff; }
+  .btn.solid:hover { background: #ff4f97; }
+  .btn svg { width: 16px; height: 16px; }
+  .btn.lg { padding: 16px 30px; font-size: 13px; }
+
+  .hamburger { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+  .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--ink); margin: 5px 0; transition: .3s; }
+
+  /* ── hero ──────────────────────────────────────────────────── */
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: center;
+    background:
+      radial-gradient(120% 80% at 80% 8%, rgba(232,63,140,0.10) 0%, rgba(232,63,140,0) 50%),
+      radial-gradient(100% 90% at 10% 100%, rgba(242,180,90,0.16) 0%, rgba(242,180,90,0) 55%),
+      linear-gradient(180deg, #FCF7EC 0%, var(--ground) 60%, var(--ground-2) 100%);
+    padding: 120px 0 70px;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+  .hero-word {
+    font-weight: 100; text-transform: uppercase; line-height: 1.0; color: var(--ink);
+    font-size: clamp(46px, 8.2vw, 112px); letter-spacing: 0.04em;
+    margin: 22px 0 0;
+  }
+  .hero-word .of { color: var(--magenta); font-weight: 200; }
+  .hero-sub { margin-top: 30px; }
+  .hero-cta { margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .hero-meta { margin-top: 52px; display: flex; gap: 40px; flex-wrap: wrap; }
+  .hero-meta .item .n { font-size: 26px; font-weight: 200; color: var(--ink); }
+  .hero-meta .item .l { font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-3); margin-top: 4px; }
+  .hero-photo { position: relative; }
+  .hero-photo image-slot { width: 100%; height: 540px; box-shadow: 0 30px 70px -30px rgba(21,38,60,0.45); }
+  .hero-photo .ring { position: absolute; inset: -14px; border: 1px solid var(--line); border-radius: 220px 220px 18px 18px; pointer-events: none; }
+
+  .scroll-cue { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%);
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-3);
+    display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .scroll-cue .ln { width: 1px; height: 34px; background: linear-gradient(var(--ink-3), transparent); }
+
+  /* ── section scaffolding ───────────────────────────────────── */
+  section { padding: clamp(72px, 9vw, 130px) 0; position: relative; }
+  .sec-head { max-width: 60ch; }
+  .sec-head h2 { font-size: clamp(30px, 4vw, 52px); margin-top: 16px; color: var(--ink); }
+  .sec-head .lead { margin-top: 22px; }
+  .divider { height: 1px; background: var(--line); border: 0; margin: 0; }
+
+  /* ── what we do ────────────────────────────────────────────── */
+  .feature-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 64px;
+    background: var(--line-2); border: 1px solid var(--line); }
+  .feature {
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0) 100%), var(--ground);
+    padding: 40px 34px 44px;
+  }
+  .feature .ix { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.24em; color: var(--magenta-deep); }
+  .feature h3 { font-size: 25px; margin-top: 22px; color: var(--ink); }
+  .feature p { color: var(--ink-2); margin-top: 14px; font-size: 16px; }
+
+  /* ── events ────────────────────────────────────────────────── */
+  .events { background: var(--ground-2); }
+  .event-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 60px; }
+  .event-card { position: relative; border: 1px solid var(--line); overflow: hidden; background: var(--ground); }
+  .event-card image-slot { width: 100%; height: 340px; }
+  .event-card .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 24px;
+    background: linear-gradient(transparent, rgba(10,20,34,0.40) 35%, rgba(10,20,34,0.88));
+    pointer-events: none; }
+  .event-card .cap h3 { font-size: 24px; color: var(--cream); }
+  .event-card .cap p { color: rgba(244,234,213,0.82); font-size: 14.5px; margin-top: 8px; }
+
+  /* ── packages ──────────────────────────────────────────────── */
+  .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; align-items: stretch; }
+  .pkg { border: 1px solid var(--line); padding: 38px 32px 36px; display: flex; flex-direction: column;
+    background: linear-gradient(180deg, #FFFFFF, rgba(255,255,255,0)); position: relative; }
+  .pkg.feat { border-color: rgba(232,63,140,0.55); background: linear-gradient(180deg, rgba(232,63,140,0.08), rgba(255,255,255,0)); box-shadow: 0 24px 60px -34px rgba(232,63,140,0.5); }
+  .pkg .badge { position: absolute; top: -1px; right: 24px; transform: translateY(-50%);
+    font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: #fff; background: var(--magenta); padding: 5px 12px; border-radius: 999px; }
+  .pkg .name { font-size: 26px; font-weight: 200; color: var(--ink); }
+  .pkg .desc { color: var(--ink-3); font-size: 13.5px; margin-top: 8px; min-height: 38px; }
+  .pkg .price { margin-top: 26px; display: flex; align-items: baseline; gap: 8px; }
+  .pkg .price .from { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3); }
+  .pkg .price .amt { font-size: 44px; font-weight: 200; color: var(--ink); }
+  .pkg ul { list-style: none; padding: 0; margin: 28px 0 0; border-top: 1px solid var(--line); }
+  .pkg li { padding: 13px 0 13px 26px; position: relative; color: var(--ink-2); font-size: 15px; border-bottom: 1px solid var(--line); }
+  .pkg li::before { content: ''; position: absolute; left: 0; top: 20px; width: 10px; height: 1px; background: var(--magenta); }
+  .pkg .pkg-cta { margin-top: 30px; }
+  .pkg .btn { width: 100%; justify-content: center; }
+  .pkg-note { text-align: center; margin-top: 28px; color: var(--ink-3); font-size: 13px; }
+
+  /* ── gallery ───────────────────────────────────────────────── */
+  .gallery { background: var(--ground); }
+  .gal-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 190px; gap: 16px; margin-top: 56px; }
+  .gal-grid image-slot { width: 100%; height: 100%; }
+  .g-a { grid-column: span 2; grid-row: span 2; }
+  .g-b { grid-column: span 2; }
+  .g-tall { grid-row: span 2; }
+
+  /* ── about ─────────────────────────────────────────────────── */
+  .about { background: var(--ground-2); }
+  .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
+  .about-photo image-slot { width: 100%; height: 480px; box-shadow: 0 30px 70px -34px rgba(21,38,60,0.4); }
+  .about-body h2 { font-size: clamp(28px, 3.6vw, 46px); color: var(--ink); }
+  .about-body p { color: var(--ink-2); margin-top: 22px; font-size: 17px; }
+  .about-body p strong { color: var(--ink); font-weight: 500; }
+  .sig { margin-top: 28px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-3); }
+
+  /* ── testimonials ──────────────────────────────────────────── */
+  .quotes { background: var(--ground); }
+  .quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .quote { border: 1px solid var(--line); padding: 34px 30px; background: linear-gradient(180deg, #FFFFFF, rgba(255,255,255,0)); }
+  .quote .mk { color: var(--magenta); font-size: 40px; line-height: 0.6; font-family: 'Jost'; font-weight: 300; }
+  .quote p { font-size: 18px; font-weight: 300; margin-top: 16px; color: var(--ink); font-style: italic; }
+  .quote .who { margin-top: 22px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); }
+
+  /* ── faq ───────────────────────────────────────────────────── */
+  .faq { background: var(--ground-2); }
+  .faq-list { margin-top: 52px; border-top: 1px solid var(--line); }
+  details.q { border-bottom: 1px solid var(--line); }
+  details.q summary {
+    list-style: none; cursor: pointer; padding: 26px 48px 26px 0; position: relative;
+    font-size: clamp(18px, 2vw, 23px); font-weight: 200; color: var(--ink);
+  }
+  details.q summary::-webkit-details-marker { display: none; }
+  details.q summary::after {
+    content: '+'; position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    font-weight: 200; font-size: 26px; color: var(--magenta); transition: transform .3s;
+  }
+  details.q[open] summary::after { content: '\2013'; }
+  details.q .ans { padding: 0 48px 28px 0; color: var(--ink-2); font-size: 16px; max-width: 78ch;
+    animation: fade .4s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+  /* ── contact (dark bookend) ────────────────────────────────── */
+  .contact { text-align: center; background:
+      radial-gradient(80% 120% at 50% 0%, rgba(232,63,140,0.20), rgba(14,27,46,0) 55%),
+      radial-gradient(90% 90% at 50% 120%, #16304F, rgba(22,48,79,0) 60%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-lo) 100%); }
+  .contact .kicker { color: var(--magenta); }
+  .contact .word { font-weight: 100; text-transform: uppercase; font-size: clamp(36px, 6vw, 78px); letter-spacing: 0.04em; margin-top: 18px; color: var(--cream); }
+  .contact .word .of { color: var(--magenta); font-weight: 200; }
+  .contact .lead { margin: 26px auto 0; color: rgba(244,234,213,0.66); }
+  .wa-block { margin-top: 46px; display: inline-flex; flex-direction: column; align-items: center; gap: 22px; }
+  .wa-pill { display: inline-flex; align-items: center; gap: 16px; border: 1px solid var(--magenta); border-radius: 999px; padding: 18px 30px; transition: background .25s, transform .25s; }
+  .wa-pill:hover { background: rgba(232,63,140,0.14); transform: translateY(-1px); }
+  .wa-pill .ic { width: 42px; height: 42px; border: 1.5px solid var(--magenta); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .wa-pill .ic svg { width: 24px; height: 24px; }
+  .wa-pill .num { font-size: 28px; font-weight: 200; letter-spacing: 0.04em; color: var(--cream); }
+  .wa-cap { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(244,234,213,0.45); }
+
+  /* ── footer ────────────────────────────────────────────────── */
+  footer { background: var(--navy-lo); border-top: 1px solid rgba(244,234,213,0.10); padding: 46px 0 40px; }
+  .foot-in { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .foot-in .mono-mark { font-weight: 200; font-size: 21px; letter-spacing: 0.12em; padding-left: 0.12em; color: var(--cream); }
+  .foot-in .mono-mark .a { color: var(--magenta); }
+  .foot-links { display: flex; gap: 26px; flex-wrap: wrap; }
+  .foot-links a, .foot-copy { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244,234,213,0.45); }
+  .foot-links a:hover { color: var(--cream); }
+
+  /* ── reveal ────────────────────────────────────────────────── */
+  .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ── responsive ────────────────────────────────────────────── */
+  @media (max-width: 1120px) { .brand .tag { display: none; } }
+  @media (max-width: 940px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-photo { order: -1; }
+    .hero-photo image-slot { height: 320px; }
+    .hero-photo .ring { border-radius: 140px 140px 14px 14px; }
+    .feature-row { grid-template-columns: 1fr; }
+    .event-grid, .pkg-grid, .quote-grid { grid-template-columns: 1fr; }
+    .pkg.feat { order: -1; }
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    .about-photo { order: -1; }
+    .about-photo image-slot { height: 340px; }
+    .gal-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+    .g-a { grid-column: span 2; grid-row: span 1; }
+  }
+  @media (max-width: 1000px) {
+    .nav-links { position: fixed; inset: 74px 0 auto 0; flex-direction: column; gap: 0;
+      background: rgba(250,244,231,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);
+      padding: 8px 0 18px; transform: translateY(-130%); transition: transform .4s ease; align-items: stretch; }
+    .nav-links.open { transform: none; }
+    .nav-links a.link { padding: 16px 28px; border-bottom: 1px solid var(--line); }
+    .nav-links .btn { margin: 14px 28px 4px; justify-content: center; }
+    .hamburger { display: block; }
+  }
+  @media (max-width: 760px) {
+    .hero-meta { gap: 26px; }
+    .wrap { padding: 0 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────────── -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Proof of Life home">
+      <span class="mono-mark">P<span class="a">O</span>L</span>
+      <span class="tag">Mobile Cocktail Co.</span>
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a class="link" href="#what">What we do</a>
+      <a class="link" href="#events">Events</a>
+      <a class="link" href="#packages">Packages</a>
+      <a class="link" href="#gallery">Gallery</a>
+      <a class="link" href="#about">About</a>
+      <a class="link" href="#faq">FAQ</a>
+      <a class="btn solid" href="https://wa.me/447403603638" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="currentColor" d="M16 3.2C8.93 3.2 3.2 8.93 3.2 16c0 2.26.6 4.46 1.73 6.4L3.2 28.8l6.56-1.72A12.74 12.74 0 0 0 16 28.8C23.07 28.8 28.8 23.07 28.8 16S23.07 3.2 16 3.2Z"/><path fill="#0E1B2E" d="M12.4 9.6c-.24-.53-.49-.54-.72-.55l-.61-.01c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65 0 1.56 1.14 3.07 1.3 3.28.16.21 2.2 3.52 5.43 4.8 2.69 1.06 3.24.85 3.82.8.58-.05 1.88-.77 2.15-1.51.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37-.32-.16-1.88-.93-2.17-1.03-.29-.11-.5-.16-.72.16-.21.32-.82 1.03-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.34-.49-2.56-1.58-.95-.84-1.58-1.89-1.77-2.2-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.7-1.74-.97-2.36Z"/></svg>
+        Message to book
+      </a>
+    </nav>
+    <button class="hamburger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ── HERO ────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="kicker reveal">Mobile bar hire · UK</span>
+      <h1 class="hero-word reveal">Pr<span class="pol-oo"><span>o</span><span>o</span></span>f<br /><span class="of">of</span> Life</h1>
+      <p class="lead hero-sub reveal">A proper cocktail bar that comes to you. One bartender, the right spirits — plus beer, wine and soft drinks — and a little warmth, for the smaller, closer gatherings where every drink actually matters.</p>
+      <div class="hero-cta reveal">
+        <a class="btn solid lg" href="https://wa.me/447403603638" target="_blank" rel="noopener">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="currentColor" d="M16 3.2C8.93 3.2 3.2 8.93 3.2 16c0 2.26.6 4.46 1.73 6.4L3.2 28.8l6.56-1.72A12.74 12.74 0 0 0 16 28.8C23.07 28.8 28.8 23.07 28.8 16S23.07 3.2 16 3.2Z"/><path fill="#0E1B2E" d="M12.4 9.6c-.24-.53-.49-.54-.72-.55l-.61-.01c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65 0 1.56 1.14 3.07 1.3 3.28.16.21 2.2 3.52 5.43 4.8 2.69 1.06 3.24.85 3.82.8.58-.05 1.88-.77 2.15-1.51.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37-.32-.16-1.88-.93-2.17-1.03-.29-.11-.5-.16-.72.16-.21.32-.82 1.03-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.34-.49-2.56-1.58-.95-.84-1.58-1.89-1.77-2.2-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.7-1.74-.97-2.36Z"/></svg>
+          Message to book
+        </a>
+        <a class="btn lg" href="#packages">See packages</a>
+      </div>
+      <div class="hero-meta reveal">
+        <div class="item"><div class="n">Intimate</div><div class="l">weddings</div></div>
+        <div class="item"><div class="n">Private</div><div class="l">parties</div></div>
+        <div class="item"><div class="n">Small</div><div class="l">gatherings</div></div>
+      </div>
+    </div>
+    <div class="hero-photo reveal">
+      <image-slot id="hero" shape="rounded" radius="14" src="images/ph-hero.png" placeholder="Drop a hero photo — bar in action"></image-slot>
+      <div class="ring"></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="ln"></span></div>
+</section>
+
+<!-- ── WHAT WE DO ──────────────────────────────────────────── -->
+<section id="what">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">What we do</span>
+      <h2>A full bar, brought to you.</h2>
+      <p class="lead">Mobile cocktail bar hire for events that deserve more than a fridge full of warm cans. Cocktails are our craft — with beer, wine and soft drinks always on hand — and one bartender on it all night, so a smaller gathering feels properly looked after.</p>
+    </div>
+    <div class="feature-row">
+      <div class="feature reveal"><div class="ix">01</div><h3>We bring everything</h3><p>Bar, glassware, ice, garnish, spirits and mixers — the whole setup arrives, gets built, and leaves without a trace. You don't lift a thing.</p></div>
+      <div class="feature reveal"><div class="ix">02</div><h3>One bartender who knows</h3><p>A single experienced pair of hands behind the bar — fast, friendly, and unhurried with a smaller crowd. Proper technique, no theatrics unless you ask.</p></div>
+      <div class="feature reveal"><div class="ix">03</div><h3>A menu that's yours</h3><p>Two house signatures or a short bespoke list built around your taste and your guests. Cocktails lead, but there's chilled beer, wine and soft drinks on the bar too — and proper alcohol-free serves always included.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENTS ──────────────────────────────────────────────── -->
+<section id="events" class="events">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Where we pour</span>
+      <h2>Made for the small ones.</h2>
+      <p class="lead">The kind of nights where it's about the people, not the headcount — twelve around a kitchen island, forty in a back garden.</p>
+    </div>
+    <div class="event-grid">
+      <div class="event-card reveal">
+        <image-slot id="ev-wed" shape="rect" src="images/ph-2.png" placeholder="Wedding photo"></image-slot>
+        <div class="cap"><h3>Intimate weddings</h3><p>A signature his-and-hers serve and an arrival drink, for the close-knit celebrations.</p></div>
+      </div>
+      <div class="event-card reveal">
+        <image-slot id="ev-party" shape="rect" src="images/ph-1.png" placeholder="Party photo"></image-slot>
+        <div class="cap"><h3>Private parties</h3><p>Birthdays, anniversaries, garden gatherings — turn an evening into an event.</p></div>
+      </div>
+      <div class="event-card reveal">
+        <image-slot id="ev-corp" shape="rect" src="images/ph-4.png" placeholder="Gathering photo"></image-slot>
+        <div class="cap"><h3>Small gatherings</h3><p>Launches, dinners and get-togethers that want a proper drink and a personal touch.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PACKAGES ────────────────────────────────────────────── -->
+<section id="packages">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Packages</span>
+      <h2>Three ways to pour.</h2>
+      <p class="lead">Every booking is one bartender, tailored to your numbers and hours — these are the starting points. Tell us the date and we'll send an exact quote.</p>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg reveal">
+        <div class="name">The Pour</div>
+        <div class="desc">The essentials, done properly.</div>
+        <div class="price"><span class="from">from</span><span class="amt">&pound;450</span></div>
+        <ul>
+          <li>One bartender, up to 3 hours</li>
+          <li>Two house signature cocktails</li>
+          <li>Beer, wine &amp; soft drinks too</li>
+          <li>Bar, glassware &amp; ice included</li>
+          <li>Soft &amp; alcohol-free options</li>
+          <li>Up to 25 guests</li>
+        </ul>
+        <div class="pkg-cta"><a class="btn" href="https://wa.me/447403603638" target="_blank" rel="noopener">Enquire</a></div>
+      </div>
+      <div class="pkg feat reveal">
+        <div class="badge">Most booked</div>
+        <div class="name">The Spread</div>
+        <div class="desc">Our full bar experience.</div>
+        <div class="price"><span class="from">from</span><span class="amt">&pound;700</span></div>
+        <ul>
+          <li>One bartender, up to 5 hours</li>
+          <li>Short cocktail menu, four serves</li>
+          <li>Beer, wine &amp; soft drinks too</li>
+          <li>Garnish program &amp; premium glassware</li>
+          <li>Arrival drink on the door</li>
+          <li>Up to 45 guests</li>
+        </ul>
+        <div class="pkg-cta"><a class="btn solid" href="https://wa.me/447403603638" target="_blank" rel="noopener">Enquire</a></div>
+      </div>
+      <div class="pkg reveal">
+        <div class="name">The Whole Night</div>
+        <div class="desc">Bespoke, top to bottom.</div>
+        <div class="price"><span class="from">from</span><span class="amt">&pound;950</span></div>
+        <ul>
+          <li>One bartender, hours to suit</li>
+          <li>Bespoke menu &amp; tasting session</li>
+          <li>Premium &amp; rare spirits</li>
+          <li>Themed or personalised serves</li>
+          <li>Up to 60 guests</li>
+        </ul>
+        <div class="pkg-cta"><a class="btn" href="https://wa.me/447403603638" target="_blank" rel="noopener">Enquire</a></div>
+      </div>
+    </div>
+    <p class="pkg-note">Prices are indicative starting points · final quote depends on guest numbers, hours &amp; travel.</p>
+  </div>
+</section>
+
+<!-- ── GALLERY ─────────────────────────────────────────────── -->
+<section id="gallery" class="gallery">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Gallery</span>
+      <h2>Last call, every time.</h2>
+      <p class="lead">Drop your own event photos straight into the grid.</p>
+    </div>
+    <div class="gal-grid">
+      <image-slot id="g1" class="g-a" shape="rect" src="images/ph-3.png" placeholder="Feature photo"></image-slot>
+      <image-slot id="g2" shape="rect" src="images/ph-5.png" placeholder="Photo"></image-slot>
+      <image-slot id="g3" shape="rect" src="images/ph-6.png" placeholder="Photo"></image-slot>
+      <image-slot id="g4" class="g-b" shape="rect" src="images/ph-7.png" placeholder="Photo"></image-slot>
+      <image-slot id="g5" shape="rect" src="images/ph-1.png" placeholder="Photo"></image-slot>
+      <image-slot id="g6" shape="rect" src="images/ph-2.png" placeholder="Photo"></image-slot>
+      <image-slot id="g7" class="g-b" shape="rect" src="images/ph-4.png" placeholder="Photo"></image-slot>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ───────────────────────────────────────────────── -->
+<section id="about" class="about">
+  <div class="wrap about-grid">
+    <div class="about-photo reveal">
+      <image-slot id="about" shape="rounded" radius="14" src="images/ph-about.png" placeholder="Team / founder photo"></image-slot>
+    </div>
+    <div class="about-body reveal">
+      <span class="kicker">Our story</span>
+      <h2>We named it after the first sip.</h2>
+      <p>Proof of Life started with a simple belief: a good drink, made properly and handed over with a bit of warmth, changes the whole feel of a room.</p>
+      <p>We're a <strong>mobile cocktail company</strong> — spirits, kit and a seasoned bartender that travel to wherever the night's happening. No corporate gloss, no clipboard energy. Just a genuinely good bar, parked in your venue for the evening.</p>
+      <p>We keep it deliberately small. One bar, one bartender, full attention on your guests — and a setup that leaves your space exactly as we found it.</p>
+      <div class="sig">— The Proof of Life team</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ────────────────────────────────────────── -->
+<section class="quotes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Kind words</span>
+      <h2>The morning-after reviews.</h2>
+    </div>
+    <div class="quote-grid">
+      <div class="quote reveal"><div class="mk">&ldquo;</div><p>Our guests are still asking who did the bar. Faultless from setup to last pour.</p><div class="who">Wedding · Cotswolds</div></div>
+      <div class="quote reveal"><div class="mk">&ldquo;</div><p>Turned a back garden into the best night of the summer. Worth every penny.</p><div class="who">40th birthday · London</div></div>
+      <div class="quote reveal"><div class="mk">&ldquo;</div><p>Professional, warm, and the cocktails were genuinely excellent. We'll book again.</p><div class="who">Anniversary · Bristol</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ─────────────────────────────────────────────────── -->
+<section id="faq" class="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Good to know</span>
+      <h2>Questions, answered.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details class="q"><summary>Do you provide the alcohol?</summary><div class="ans">Yes — spirits, mixers, garnish and ice come as standard. Prefer to supply your own? We're happy to work on a dry-hire basis, where you provide the stock and we bring the bar, kit and bartender.</div></details>
+      <details class="q"><summary>How much space do you need?</summary><div class="ans">A footprint of roughly 2m × 1.5m and reasonably level access is plenty for the bar. We'll talk through your venue beforehand so setup is effortless on the day.</div></details>
+      <details class="q"><summary>How far do you travel?</summary><div class="ans">We're a mobile bar, so travel is the point. Local events are covered as standard; anything further afield is easily arranged with a small travel charge folded into your quote.</div></details>
+      <details class="q"><summary>Are you licensed and insured?</summary><div class="ans">Yes — we carry public liability insurance and hold a personal licence. If your venue needs a Temporary Event Notice, we'll guide you through it.</div></details>
+      <details class="q"><summary>How many guests can one bar handle?</summary><div class="ans">We're built for intimate events — up to around 60 guests with a single bartender. That's where one bar shines: everyone gets a proper drink and a bit of attention, with no queue swallowing the evening.</div></details>
+      <details class="q"><summary>Is it only cocktails?</summary><div class="ans">Cocktails are what we do best, but they're far from the whole bar. Every booking comes with chilled beer, wine and soft drinks as standard, plus thoughtful alcohol-free serves — so there's something for everyone, whatever they're in the mood for.</div></details>
+      <details class="q"><summary>Can you make a non-alcoholic menu?</summary><div class="ans">Always. Every package includes thoughtful alcohol-free serves, and we're glad to build a full zero-proof menu that's every bit as good as the rest.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ─────────────────────────────────────────────── -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <span class="kicker reveal">Book the bar</span>
+    <h2 class="word reveal">Pr<span class="pol-oo">oo</span>f <span class="of">of</span> a good night</h2>
+    <p class="lead reveal">Tell us the date, the place and roughly how many. We'll come back with a tailored quote — usually the same day.</p>
+    <div class="wa-block reveal">
+      <a class="wa-pill" href="https://wa.me/447403603638" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="#F4EAD5" d="M16 3.2C8.93 3.2 3.2 8.93 3.2 16c0 2.26.6 4.46 1.73 6.4L3.2 28.8l6.56-1.72A12.74 12.74 0 0 0 16 28.8C23.07 28.8 28.8 23.07 28.8 16S23.07 3.2 16 3.2Z"/><path fill="#0E1B2E" d="M12.4 9.6c-.24-.53-.49-.54-.72-.55l-.61-.01c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65 0 1.56 1.14 3.07 1.3 3.28.16.21 2.2 3.52 5.43 4.8 2.69 1.06 3.24.85 3.82.8.58-.05 1.88-.77 2.15-1.51.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37-.32-.16-1.88-.93-2.17-1.03-.29-.11-.5-.16-.72.16-.21.32-.82 1.03-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.34-.49-2.56-1.58-.95-.84-1.58-1.89-1.77-2.2-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.7-1.74-.97-2.36Z"/></svg></span>
+        <span class="num">+44 7403 603638</span>
+      </a>
+      <span class="wa-cap">Message to book · WhatsApp</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────────────── -->
+<footer>
+  <div class="wrap foot-in">
+    <div class="brand"><span class="mono-mark">P<span class="a">O</span>L</span></div>
+    <nav class="foot-links">
+      <a href="#what">What we do</a>
+      <a href="#packages">Packages</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://wa.me/447403603638" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+    <div class="foot-copy">© 2026 Proof of Life · Mobile Cocktail Co.</div>
+  </div>
+</footer>
+
+<script src="image-slot.js"></script>
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  const burger = document.getElementById('burger');
+  const links = document.getElementById('navlinks');
+  burger.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i * 80) + 'ms';
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('section:not(.hero) .reveal').forEach((el, i) => {
+    el.style.transitionDelay = (Math.min(i % 3, 2) * 70) + 'ms';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
