@@ -1,37 +1,44 @@
 # Proof of Life — Website
 
-Marketing site for **Proof of Life · Mobile Cocktail Co.** — a UK mobile cocktail bar for small, close gatherings. Single static page, no build step.
+Marketing site for **Proof of Life · Mobile Cocktail Co.** — a UK mobile cocktail bar
+for small, close gatherings. Single-page React SPA (Vite + TypeScript), no router.
 
 ## Run it
-It's a plain static site. Any of:
-- Open `index.html` directly in a browser, **or**
-- `python3 -m http.server` then visit the printed URL (needed so `image-slot.js` and the local images load without file:// quirks).
+- `npm install` once, then `npm run dev`.
+- `npm test` — Vitest + Testing Library.
+- `npm run build` — type-check + production build to `dist/`.
 
-No dependencies to install — fonts load from Google Fonts via CDN.
+## Editing content — start here
+**All copy, prices, packages, FAQs, testimonials and contact details live in
+`src/content.ts`.** Change a price or add an FAQ there; components render whatever
+the config says. The WhatsApp number appears once (`brand.whatsapp`) and every CTA
+derives from it.
 
 ## Files
-- `index.html` — the entire site (inline `<style>` + inline `<script>` at the bottom).
-- `image-slot.js` — `<image-slot>` web component: drag-and-drop image placeholders used for all photography. Each slot has a stable `id`; dropped images persist in the browser via localStorage. `src=` points at the seeded placeholder in `images/`.
-- `images/` — placeholder photography (`ph-hero`, `ph-1..7`, `ph-about`). Swap these for real shoot photos, keeping filenames, or drop new images onto the slots in-browser.
+- `src/content.ts` — the typed content config (the file you usually want).
+- `src/components/` — one component per page section, plus shared bits
+  (`Wordmark`, `WhatsAppIcon`, `SectionHead`).
+- `src/hooks/` — `useReveal` (scroll-reveal IntersectionObserver), `useScrolled` (nav).
+- `src/styles/global.css` — all styling; brand tokens are CSS custom properties in `:root`.
+- `public/images/` — photography. Replace a file (keep the name) and push to swap a photo.
+- `public/CNAME` — custom domain (proofoflife.bar); Vite copies it into `dist/`.
+- `index.html` — Vite entry; Google Fonts + counter.dev analytics live here.
 
 ## Brand
-Palette:
-- Navy ground `#0E1B2E` (gradient `#16304F` → `#0E1B2E` → `#0A1422`)
-- Cream `#F4EAD5`
-- Magenta accent `#E83F8C` (deep `#C42C72`)
-
-Type: **Jost** (100–300 weight) for headings/wordmark; **DM Mono** for kickers, labels, nav, buttons.
-
-CSS custom properties live in `:root` at the top of the `<style>` block — edit tokens there.
-
-## Structure (top → bottom)
-Nav · Hero · What-we-do features · Events (3 cards) · Packages (3 tiers) · Gallery · About · Testimonials · FAQ · Contact (dark, WhatsApp CTA) · Footer.
+Palette: navy ground `#0E1B2E`, cream `#F4EAD5`, magenta accent `#E83F8C`
+(deep `#C42C72`). Type: **Jost** (100–300) for headings; **DM Mono** for
+kickers/labels/nav/buttons. Tokens in `:root` at the top of `global.css`.
 
 ## Notable details
-- **Wordmark "Proof"** — the two O's are `.pol-oo` (inline-flex with a `gap`) and a magenta `/` slash sits centered between them via `::after`. If you retheme, keep the slash centered on the gap.
-- **CTAs** all deep-link to WhatsApp booking: `https://wa.me/447403603638`.
-- Website address: **proofoflife.bar**.
-- Scroll-reveal animations via `.reveal` + an IntersectionObserver in the inline script; nav gets a `.scrolled` class past the hero.
+- **Wordmark "Proof"** — the two O's are `.pol-oo` with a magenta `/` slash centered
+  via `::after` (see `Wordmark.tsx`). Keep the slash centered on the gap if retheming.
+- Section order: Nav · Hero · Features · Events · Packages · Gallery · About ·
+  Testimonials · FAQ · Contact · Footer (`src/App.tsx`).
 
-## Related (not in this bundle)
-The logo/identity, business card, and WhatsApp booking QR live in the parent design project.
+## Deploying
+Push to `main` → `.github/workflows/deploy.yml` tests, builds, and publishes `dist/`
+to GitHub Pages. Repo setting: Pages source must be **GitHub Actions**.
+
+## Related (not in this repo)
+The logo/identity, business card, and WhatsApp booking QR live in the parent design
+project.
