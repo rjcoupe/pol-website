@@ -9,7 +9,7 @@ export function Testimonials() {
         <div className="quote-grid">
           {testimonials.quotes.map((q) => (
             <div className="quote reveal" key={q.who}>
-              <div className="mk">"</div>
+              <div className="mk">“</div>
               <p>{q.quote}</p>
               <div className="who">{q.who}</div>
             </div>
