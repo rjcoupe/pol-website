@@ -1,14 +1,14 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { Packages } from './Packages';
 import { Gallery } from './Gallery';
 import { About } from './About';
 import { packages, gallery, about } from '../content';
 
 test('Packages renders every tier with price and items', () => {
-  const { container } = render(<Packages />);
+  render(<Packages />);
   for (const t of packages.tiers) {
-    const tierEl = screen.getByText(t.name).closest('.pkg');
-    expect(tierEl).toHaveTextContent(`£${t.fromPrice}`);
+    const tierEl = screen.getByText(t.name).closest('.pkg') as HTMLElement;
+    expect(within(tierEl).getByText(`£${t.fromPrice}`)).toBeInTheDocument();
     for (const item of t.items) {
       expect(tierEl).toHaveTextContent(item);
     }
