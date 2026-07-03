@@ -4,16 +4,20 @@ import { SectionHead } from './SectionHead';
 const sizeClass = { feature: ' g-a', wide: ' g-b', normal: '' } as const;
 
 export function Gallery() {
-  return (
-    <section id="gallery" className="gallery">
-      <div className="wrap">
-        <SectionHead head={gallery.head} />
-        <div className="gal-grid">
-          {gallery.images.map((g, i) => (
-            <img key={i} className={sizeClass[g.size].trim() || undefined} src={g.image} alt={g.alt} />
-          ))}
+  if (gallery.images.length >= 4) {
+    return (
+      <section id="gallery" className="gallery">
+        <div className="wrap">
+          <SectionHead head={gallery.head} />
+          <div className="gal-grid">
+            {gallery.images.map((g, i) => (
+              <img key={i} className={sizeClass[g.size].trim() || undefined} src={g.image} alt={g.alt} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  } else {
+    return null
+  }
 }

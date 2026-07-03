@@ -157,13 +157,13 @@ export const gallery = {
     lead: 'A few favourites from recent pours.',
   } satisfies SectionHeadContent,
   images: [
-    { image: '/images/ph-3.png', alt: 'Signature cocktail close-up', size: 'feature' },
-    { image: '/images/ph-5.png', alt: 'Garnish preparation', size: 'normal' },
-    { image: '/images/ph-6.png', alt: 'The bar setup', size: 'normal' },
-    { image: '/images/ph-7.png', alt: 'Guests at the bar', size: 'wide' },
-    { image: '/images/ph-1.png', alt: 'Evening pours', size: 'normal' },
-    { image: '/images/ph-2.png', alt: 'A toast', size: 'normal' },
-    { image: '/images/ph-4.png', alt: 'Last drinks of the night', size: 'wide' },
+    // { image: '/images/ph-3.png', alt: 'Signature cocktail close-up', size: 'feature' },
+    // { image: '/images/ph-5.png', alt: 'Garnish preparation', size: 'normal' },
+    // { image: '/images/ph-6.png', alt: 'The bar setup', size: 'normal' },
+    // { image: '/images/ph-7.png', alt: 'Guests at the bar', size: 'wide' },
+    // { image: '/images/ph-1.png', alt: 'Evening pours', size: 'normal' },
+    // { image: '/images/ph-2.png', alt: 'A toast', size: 'normal' },
+    // { image: '/images/ph-4.png', alt: 'Last drinks of the night', size: 'wide' },
   ] as { image: string; alt: string; size: 'feature' | 'wide' | 'normal' }[],
 };
 
