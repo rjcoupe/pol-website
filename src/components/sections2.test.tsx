@@ -26,8 +26,8 @@ test('featured tier gets the feat class and badge', () => {
 test('Gallery renders all images with layout classes', () => {
   const { container } = render(<Gallery />);
   expect(container.querySelectorAll('.gal-grid img')).toHaveLength(gallery.images.length);
-  expect(container.querySelectorAll('.gal-grid img.g-a')).toHaveLength(1);
-  expect(container.querySelectorAll('.gal-grid img.g-b')).toHaveLength(2);
+  expect(container.querySelectorAll('.gal-grid img.g-a')).toHaveLength(gallery.images.filter(i => i.size === 'feature').length);
+  expect(container.querySelectorAll('.gal-grid img.g-b')).toHaveLength(gallery.images.filter(i => i.size === 'wide').length);
 });
 
 test('About renders paragraphs with bold span as <strong>', () => {

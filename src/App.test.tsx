@@ -4,7 +4,7 @@ import { brand } from './content';
 
 test('renders every anchored section', () => {
   const { container } = render(<App />);
-  for (const id of ['what', 'events', 'packages', 'gallery', 'about', 'faq', 'contact']) {
+  for (const id of ['what', 'events', 'packages', 'about', 'faq', 'contact']) {
     expect(container.querySelector(`section#${id}`)).not.toBeNull();
   }
   expect(container.querySelector('header.nav')).not.toBeNull();

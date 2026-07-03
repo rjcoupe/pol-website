@@ -1,10 +1,10 @@
-import { gallery } from '../content';
+import { gallery, galleryEnabled } from '../content';
 import { SectionHead } from './SectionHead';
 
 const sizeClass = { feature: ' g-a', wide: ' g-b', normal: '' } as const;
 
 export function Gallery() {
-  if (gallery.images.length >= 4) {
+  if (galleryEnabled) {
     return (
       <section id="gallery" className="gallery">
         <div className="wrap">

@@ -25,7 +25,7 @@ export const brand = {
 
 export const waLink = `https://wa.me/${brand.whatsapp}`;
 
-export const nav: { label: string; href: string }[] = [
+export let nav: { label: string; href: string }[] = [
   { label: 'What we do', href: '#what' },
   { label: 'Events', href: '#events' },
   { label: 'Packages', href: '#packages' },
@@ -167,6 +167,8 @@ export const gallery = {
   ] as { image: string; alt: string; size: 'feature' | 'wide' | 'normal' }[],
 };
 
+export const galleryEnabled = gallery.images.length >= 4;
+
 export const about = {
   kicker: 'Our story',
   heading: 'We named it after the first sip.',
@@ -253,3 +255,5 @@ export const footer = {
     { label: 'FAQ', href: '#faq' },
   ],
 };
+
+if (!galleryEnabled) nav = nav.filter(n => n.label !== 'Gallery');
