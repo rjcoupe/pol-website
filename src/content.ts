@@ -46,7 +46,7 @@ export const features = {
   head: {
     kicker: 'What we do',
     title: 'A full bar, brought to you.',
-    lead: "Mobile cocktail bar hire for events that deserve more than a fridge full of warm cans. Cocktails are the main event — with beer, wine and soft drinks always on the bar — and one bartender on it all night, so a smaller gathering feels properly looked after.",
+    lead: "Mobile cocktail bar hire for events that deserve more than a fridge full of inexplicably warm cans. Cocktails are the main event — with beer, wine and soft drinks always on the bar — and one bartender on it all night, so a smaller gathering feels properly looked after.",
   } satisfies SectionHeadContent,
   cards: [
     {
