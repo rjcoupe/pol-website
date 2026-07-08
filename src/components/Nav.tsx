@@ -3,6 +3,7 @@ import { brand, nav, waLink } from '../content';
 import { useScrolled } from '../hooks/useScrolled';
 import { MonoMark } from './Wordmark';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { ThemeToggle } from './ThemeToggle';
 
 export function Nav() {
   const scrolled = useScrolled();
@@ -25,6 +26,7 @@ export function Nav() {
             <WhatsAppIcon />
             {brand.ctaLabel}
           </a>
+          <ThemeToggle />
         </nav>
         <button className="hamburger" aria-label="Menu" onClick={() => setOpen((o) => !o)}>
           <span />
