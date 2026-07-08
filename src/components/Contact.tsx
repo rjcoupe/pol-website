@@ -1,4 +1,5 @@
 import { brand, contact, waLink } from '../content';
+import { PolOO } from './Wordmark';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
 export function Contact() {
@@ -7,7 +8,8 @@ export function Contact() {
       <div className="wrap">
         <span className="kicker reveal">{contact.kicker}</span>
         <h2 className="word reveal">
-          Pr<span className="pol-oo">oo</span>f <span className="of">of</span>{' '}
+          Pr
+          <PolOO />f <span className="of">of</span>{' '}
           {contact.headingTail}
         </h2>
         <p className="lead reveal">{contact.lead}</p>

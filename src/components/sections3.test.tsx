@@ -25,3 +25,14 @@ test('Contact shows display number linking to WhatsApp', () => {
   const pill = screen.getByText(brand.whatsappDisplay).closest('a')!;
   expect(pill).toHaveAttribute('href', waLink);
 });
+
+test('Contact wordmark wraps each O in its own span so the flex gap applies', () => {
+  const { container } = render(<Contact />);
+  // .pol-oo relies on inline-flex gap for the slash clearance; a bare "oo"
+  // text node collapses to one flex item and the O's crowd the slash.
+  const oo = container.querySelector('.word .pol-oo')!;
+  expect(oo).not.toBeNull();
+  const spans = oo.querySelectorAll(':scope > span');
+  expect(spans).toHaveLength(2);
+  spans.forEach((s) => expect(s.textContent).toBe('o'));
+});
