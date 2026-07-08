@@ -223,11 +223,15 @@ export const faqs = {
     },
     {
       q: 'How much space do you need?',
-      a: "A footprint of roughly 2m × 1.5m and reasonably level access is plenty for the bar. We'll talk through your venue beforehand so setup is effortless on the day.",
+      a: "A footprint of roughly 2m² and reasonably level access is plenty for the bar. We'll talk through your venue beforehand so setup is effortless on the day.",
     },
     {
       q: 'Do you need power?',
-      a: "One standard plug socket within reach runs the whole bar — lights, fridges and all. If your garden hasn't got one, tell us when you book and we'll plan around it.",
+      a: "Ideally, we need one standard plug socket within reach to run the whole bar — lights, fridges and all. If your garden hasn't got one, tell us when you book and we'll plan around it.",
+    },
+    {
+      q: 'Anything else needed from us at the location?',
+      a: 'In the rare occurrence that mobile signal is not-a-thing, we need WiFi access to enable payments.'
     },
     {
       q: 'How long does setup take?',
