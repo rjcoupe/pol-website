@@ -1,4 +1,9 @@
-import { brand, waLink, igLink, packages, faqs, gallery } from './content';
+import { brand, waLink, igLink, packages, faqs, gallery, galleryEnabled, nav, footer } from './content';
+
+test('nav and footer link to the gallery only when it is enabled', () => {
+  expect(nav.some((l) => l.href === '#gallery')).toBe(galleryEnabled);
+  expect(footer.links.some((l) => l.href === '#gallery')).toBe(galleryEnabled);
+});
 
 test('whatsapp number is digits only and drives waLink', () => {
   expect(brand.whatsapp).toMatch(/^\d+$/);

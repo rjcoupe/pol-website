@@ -27,14 +27,8 @@ export const brand = {
 export const waLink = `https://wa.me/${brand.whatsapp}`;
 export const igLink = `https://www.instagram.com/${brand.instagram}`;
 
-export let nav: { label: string; href: string }[] = [
-  { label: 'What we do', href: '#what' },
-  { label: 'Events', href: '#events' },
-  { label: 'Packages', href: '#packages' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'About', href: '#about' },
-  { label: 'FAQ', href: '#faq' },
-];
+// nav is defined with footer at the bottom of this file, where gallery
+// visibility is known.
 
 export const hero = {
   kicker: 'Mobile bar hire · UK',
@@ -249,13 +243,24 @@ export const contact = {
   caption: 'Message to book · WhatsApp',
 };
 
+// Gallery links (nav and footer) only appear when the gallery section shows.
+const dropGallery = (links: { label: string; href: string }[]) =>
+  links.filter((l) => galleryEnabled || l.href !== '#gallery');
+
+export const nav = dropGallery([
+  { label: 'What we do', href: '#what' },
+  { label: 'Events', href: '#events' },
+  { label: 'Packages', href: '#packages' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'About', href: '#about' },
+  { label: 'FAQ', href: '#faq' },
+]);
+
 export const footer = {
-  links: [
+  links: dropGallery([
     { label: 'What we do', href: '#what' },
     { label: 'Packages', href: '#packages' },
     { label: 'Gallery', href: '#gallery' },
     { label: 'FAQ', href: '#faq' },
-  ],
+  ]),
 };
-
-if (!galleryEnabled) nav = nav.filter(n => n.label !== 'Gallery');

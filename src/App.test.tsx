@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import App from './App';
-import { brand } from './content';
+import { brand, galleryEnabled } from './content';
 
 test('renders every anchored section', () => {
   const { container } = render(<App />);
@@ -9,6 +9,13 @@ test('renders every anchored section', () => {
   }
   expect(container.querySelector('header.nav')).not.toBeNull();
   expect(container.querySelector('footer')).not.toBeNull();
+});
+
+test('gallery section renders only when enabled', () => {
+  const { container } = render(<App />);
+  const section = container.querySelector('section#gallery');
+  if (galleryEnabled) expect(section).not.toBeNull();
+  else expect(section).toBeNull();
 });
 
 test('every WhatsApp link uses the configured number', () => {
