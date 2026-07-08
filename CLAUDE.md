@@ -37,6 +37,8 @@ kickers/labels/nav/buttons. Tokens in `:root` at the top of `global.css`.
   via `::after` (see `Wordmark.tsx`). Keep the slash centered on the gap if retheming.
 - Section order: Nav · Hero · Features · Events · Packages · Gallery · About ·
   Testimonials · FAQ · Contact · Footer (`src/App.tsx`).
+- **Contact + footer stay navy in both themes** — the "dark bookend" is intentional
+  (original design, reconfirmed 2026-07). Not a theme-toggle bug.
 
 ## Deploying
 Push to `main` → `.github/workflows/deploy.yml` tests, builds, and publishes `dist/`
