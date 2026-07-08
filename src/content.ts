@@ -31,8 +31,8 @@ export const igLink = `https://www.instagram.com/${brand.instagram}`;
 // visibility is known.
 
 export const hero = {
-  kicker: 'Mobile bar hire · UK',
-  lead: 'A proper cocktail bar that comes to you. One bartender, the right spirits — plus beer, wine and soft drinks — and a little warmth, for the smaller, closer gatherings where every drink actually matters.',
+  kicker: 'Mobile bar hire · South Wales',
+  lead: 'The #1 mobile cocktail bar in South Wales, according to us. One bartender, the right spirits — plus beer, wine and soft drinks — brought to the smaller, closer gatherings where every drink actually matters.',
   ctaSecondary: 'See packages',
   stats: [
     { big: 'Intimate', small: 'weddings' },
@@ -46,7 +46,7 @@ export const features = {
   head: {
     kicker: 'What we do',
     title: 'A full bar, brought to you.',
-    lead: "Mobile cocktail bar hire for events that deserve more than a fridge full of warm cans. Cocktails are our craft — with beer, wine and soft drinks always on hand — and one bartender on it all night, so a smaller gathering feels properly looked after.",
+    lead: "Mobile cocktail bar hire for events that deserve more than a fridge full of warm cans. Cocktails are the main event — with beer, wine and soft drinks always on the bar — and one bartender on it all night, so a smaller gathering feels properly looked after.",
   } satisfies SectionHeadContent,
   cards: [
     {
@@ -57,7 +57,7 @@ export const features = {
     {
       index: '02',
       title: 'One bartender who knows',
-      body: 'A single experienced pair of hands behind the bar — fast, friendly, and unhurried with a smaller crowd. Proper technique, no theatrics unless you ask.',
+      body: 'A single experienced pair of hands behind the bar — fast, friendly, and unhurried with a smaller crowd. Proper technique, no theatrics unless you ask nicely.',
     },
     {
       index: '03',
@@ -125,14 +125,14 @@ export const packages = {
         'One bartender, up to 5 hours',
         'Short cocktail menu, four serves',
         'Beer, wine & soft drinks too',
-        'Garnish program & premium glassware',
+        'Proper garnishes & premium glassware',
         'Arrival drink on the door',
         'Up to 45 guests',
       ],
     },
     {
       name: 'The Whole Night',
-      desc: 'Bespoke, top to bottom.',
+      desc: 'The spoil-everyone option.',
       fromPrice: 950,
       items: [
         'One bartender, hours to suit',
@@ -170,8 +170,8 @@ export const about = {
   heading: 'We named it after the first sip.',
   // **bold** spans render as <strong>
   paragraphs: [
-    'Proof of Life started with a simple belief: a good drink, made properly and handed over with a bit of warmth, changes the whole feel of a room.',
-    "We're a **mobile cocktail company** — spirits, kit and a seasoned bartender that travel to wherever the night's happening. No corporate gloss, no clipboard energy. Just a genuinely good bar, parked in your venue for the evening.",
+    'Proof of Life started with a simple idea: a good drink, made properly and handed over with a smile, can turn a decent evening into a great one.',
+    "We're a **mobile cocktail company** — spirits, kit and a seasoned bartender that travel to wherever the night's happening. South Wales mostly, but we don't mind a drive. No corporate gloss, no clipboard energy. Just a genuinely good bar, parked in your venue for the evening.",
     'We keep it deliberately small. One bar, one bartender, full attention on your guests — and a setup that leaves your space exactly as we found it.',
   ],
   signature: '— The Proof of Life team',
@@ -186,11 +186,11 @@ export const testimonials = {
   quotes: [
     {
       quote: 'Our guests are still asking who did the bar. Faultless from setup to last pour.',
-      who: 'Wedding · Cotswolds',
+      who: 'Wedding · Gower',
     },
     {
       quote: 'Turned a back garden into the best night of the summer. Worth every penny.',
-      who: '40th birthday · London',
+      who: '40th birthday · Cardiff',
     },
     {
       quote: "Professional, warm, and the cocktails were genuinely excellent. We'll book again.",
@@ -215,7 +215,7 @@ export const faqs = {
     },
     {
       q: 'How far do you travel?',
-      a: "We're a mobile bar, so travel is the point. Local events are covered as standard; anything further afield is easily arranged with a small travel charge folded into your quote.",
+      a: "We're based in South Wales, but a mobile bar that won't travel is just a bar. Local events are covered as standard; anything further afield is easily arranged with a small travel charge folded into your quote.",
     },
     {
       q: 'Are you licensed and insured?',
