@@ -105,7 +105,7 @@ export const packages = {
     {
       name: 'The Pour',
       desc: 'The essentials, done properly.',
-      fromPrice: 150,
+      fromPrice: 195,
       items: [
         'One bartender, up to 3 hours',
         'Two house signature cocktails',
@@ -118,7 +118,7 @@ export const packages = {
     {
       name: 'The Spread',
       desc: 'Our full bar experience.',
-      fromPrice: 700,
+      fromPrice: 475,
       featured: true,
       badge: 'Most booked',
       items: [
@@ -143,7 +143,7 @@ export const packages = {
       ],
     },
   ] satisfies Package[],
-  note: 'Prices are hire starting points — final quote depends on numbers, hours & travel. Guests buy their own drinks on the night (or run them a tab, if you’re feeling generous).',
+  note: 'Prices are hire starting points — final quote depends on numbers, hours & travel. Guests buy their own drinks on the night (or run them a tab, if you’re feeling generous). A minimum bar spend applies — we’ll agree it in your quote.',
 };
 
 export const gallery = {
