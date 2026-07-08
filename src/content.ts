@@ -218,8 +218,20 @@ export const faqs = {
       a: "We're a fully cashless bar — cards, phones and watches are all welcome; pound coins, sadly, are not. It keeps the queue moving and the maths honest. The hire itself is invoiced ahead of the day.",
     },
     {
+      q: 'What do drinks cost on the night?',
+      a: "Nothing scary — we price in line with a good local bar, not a festival tent. The menu comes priced with your quote, so you and your guests know exactly what a round looks like before anyone's coat is off.",
+    },
+    {
       q: 'How much space do you need?',
       a: "A footprint of roughly 2m × 1.5m and reasonably level access is plenty for the bar. We'll talk through your venue beforehand so setup is effortless on the day.",
+    },
+    {
+      q: 'Do you need power?',
+      a: "One standard plug socket within reach runs the whole bar — lights, fridges and all. If your garden hasn't got one, tell us when you book and we'll plan around it.",
+    },
+    {
+      q: 'How long does setup take?',
+      a: "We arrive about an hour before service to build the bar, chill everything down and make it look the part. Breakdown is quicker — by the time the last guests drift off, you'd barely know we'd been.",
     },
     {
       q: 'How far do you travel?',
@@ -240,6 +252,18 @@ export const faqs = {
     {
       q: 'Can you make a non-alcoholic menu?',
       a: "Always. Every package includes thoughtful alcohol-free serves, and we're glad to build a full zero-proof menu that's every bit as good as the rest.",
+    },
+    {
+      q: 'How far ahead should we book?',
+      a: "Summer weekends and December go first — a couple of months' notice is comfortable, more for peak dates. That said, if the party's on Saturday and you're reading this on Tuesday, message us anyway.",
+    },
+    {
+      q: 'How do deposits work?',
+      a: "£100 holds your date, with the balance due 48 hours before the event. The deposit comes straight off your final invoice — it's a bookmark, not an extra.",
+    },
+    {
+      q: 'What if we need to cancel?',
+      a: "Plans wobble — we get it. Cancel with more than 14 days' notice and we'll refund your deposit or move it to a new date. Inside 14 days the deposit is non-refundable, though we'll always try to reschedule before waving goodbye.",
     },
   ],
 };
