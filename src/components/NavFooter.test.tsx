@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Nav } from './Nav';
 import { Footer } from './Footer';
-import { nav, footer, brand, waLink } from '../content';
+import { nav, footer, brand, waLink, igLink } from '../content';
 
 test('Nav renders every nav link and the booking CTA', () => {
   render(<Nav />);
@@ -29,5 +29,8 @@ test('Footer renders links, WhatsApp, and copyright', () => {
     expect(screen.getByRole('link', { name: l.label })).toHaveAttribute('href', l.href);
   }
   expect(screen.getByRole('link', { name: 'WhatsApp' })).toHaveAttribute('href', waLink);
+  const ig = screen.getByRole('link', { name: 'Instagram' });
+  expect(ig).toHaveAttribute('href', igLink);
+  expect(ig).toHaveAttribute('target', '_blank');
   expect(screen.getByText(brand.copyright)).toBeInTheDocument();
 });

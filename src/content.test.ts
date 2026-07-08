@@ -1,8 +1,13 @@
-import { brand, waLink, packages, faqs, gallery } from './content';
+import { brand, waLink, igLink, packages, faqs, gallery } from './content';
 
 test('whatsapp number is digits only and drives waLink', () => {
   expect(brand.whatsapp).toMatch(/^\d+$/);
   expect(waLink).toBe(`https://wa.me/${brand.whatsapp}`);
+});
+
+test('instagram handle drives igLink', () => {
+  expect(brand.instagram).toBe('proofoflifemobilebar');
+  expect(igLink).toBe(`https://www.instagram.com/${brand.instagram}`);
 });
 
 test('exactly one package is featured and all have items', () => {

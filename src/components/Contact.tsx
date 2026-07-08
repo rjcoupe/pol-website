@@ -1,4 +1,4 @@
-import { brand, contact, waLink } from '../content';
+import { brand, contact, igLink, waLink } from '../content';
 import { PolOO } from './Wordmark';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
@@ -21,6 +21,9 @@ export function Contact() {
             <span className="num">{brand.whatsappDisplay}</span>
           </a>
           <span className="wa-cap">{contact.caption}</span>
+          <a className="ig-link" href={igLink} target="_blank" rel="noopener">
+            @{brand.instagram}
+          </a>
         </div>
       </div>
     </section>

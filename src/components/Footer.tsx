@@ -1,4 +1,4 @@
-import { brand, footer, waLink } from '../content';
+import { brand, footer, waLink, igLink } from '../content';
 import { MonoMark } from './Wordmark';
 
 export function Footer() {
@@ -14,6 +14,9 @@ export function Footer() {
               {l.label}
             </a>
           ))}
+          <a href={igLink} target="_blank" rel="noopener">
+            Instagram
+          </a>
           <a href={waLink} target="_blank" rel="noopener">
             WhatsApp
           </a>

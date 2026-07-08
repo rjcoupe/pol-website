@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Testimonials } from './Testimonials';
 import { Faq } from './Faq';
 import { Contact } from './Contact';
-import { testimonials, faqs, brand, waLink } from '../content';
+import { testimonials, faqs, brand, waLink, igLink } from '../content';
 
 test('Testimonials renders all quotes', () => {
   render(<Testimonials />);
@@ -24,6 +24,13 @@ test('Contact shows display number linking to WhatsApp', () => {
   render(<Contact />);
   const pill = screen.getByText(brand.whatsappDisplay).closest('a')!;
   expect(pill).toHaveAttribute('href', waLink);
+});
+
+test('Contact links the Instagram handle', () => {
+  render(<Contact />);
+  const ig = screen.getByRole('link', { name: `@${brand.instagram}` });
+  expect(ig).toHaveAttribute('href', igLink);
+  expect(ig).toHaveAttribute('target', '_blank');
 });
 
 test('Contact wordmark wraps each O in its own span so the flex gap applies', () => {

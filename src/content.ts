@@ -19,11 +19,13 @@ export const brand = {
   ctaLabel: 'Message to book',
   whatsapp: '447403603638',
   whatsappDisplay: '+44 7403 603638',
+  instagram: 'proofoflifemobilebar',
   website: 'proofoflife.bar',
   copyright: '© 2026 Proof of Life · Mobile Cocktail Co.',
 };
 
 export const waLink = `https://wa.me/${brand.whatsapp}`;
+export const igLink = `https://www.instagram.com/${brand.instagram}`;
 
 export let nav: { label: string; href: string }[] = [
   { label: 'What we do', href: '#what' },

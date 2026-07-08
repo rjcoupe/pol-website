@@ -268,6 +268,8 @@
   .wa-pill .ic svg { width: 24px; height: 24px; }
   .wa-pill .num { font-size: 28px; font-weight: 200; letter-spacing: 0.04em; color: var(--cream); }
   .wa-cap { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream-50); }
+  .ig-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--cream-50); transition: color .2s; }
+  .ig-link:hover { color: var(--magenta); }
 
   /* ── footer ────────────────────────────────────────────────── */
   footer { background: var(--navy-lo); border-top: 1px solid var(--cream-line); padding: 46px 0 40px; }
