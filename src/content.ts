@@ -143,7 +143,7 @@ export const packages = {
       ],
     },
   ] satisfies Package[],
-  note: 'Prices are indicative starting points · final quote depends on guest numbers, hours & travel.',
+  note: 'Prices are hire starting points — final quote depends on numbers, hours & travel. Guests buy their own drinks on the night (or run them a tab, if you’re feeling generous).',
 };
 
 export const gallery = {
@@ -208,6 +208,14 @@ export const faqs = {
     {
       q: 'Do you provide the alcohol?',
       a: "Yes — spirits, mixers, garnish and ice come as standard. Prefer to supply your own? We're happy to work on a dry-hire basis, where you provide the stock and we bring the bar, kit and bartender.",
+    },
+    {
+      q: 'Who pays for the drinks?',
+      a: "By default, your guests do — it works like any good bar, just much closer to the dance floor. The hire fee covers the bar, the kit and the bartender. Feeling generous? Put a tab behind the bar or include a round of serves when you book, and we'll sort the rest.",
+    },
+    {
+      q: 'Can guests pay cash?',
+      a: "We're a fully cashless bar — cards, phones and watches are all welcome; pound coins, sadly, are not. It keeps the queue moving and the maths honest. The hire itself is invoiced ahead of the day.",
     },
     {
       q: 'How much space do you need?',
