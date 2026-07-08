@@ -17,12 +17,15 @@ derives from it.
 ## Files
 - `src/content.ts` — the typed content config (the file you usually want).
 - `src/components/` — one component per page section, plus shared bits
-  (`Wordmark`, `WhatsAppIcon`, `SectionHead`).
-- `src/hooks/` — `useReveal` (scroll-reveal IntersectionObserver), `useScrolled` (nav).
-- `src/styles/global.css` — all styling; brand tokens are CSS custom properties in `:root`.
+  (`Wordmark`, `WhatsAppIcon`, `SectionHead`, `ThemeToggle`).
+- `src/hooks/` — `useReveal` (scroll-reveal IntersectionObserver), `useScrolled` (nav),
+  `useTheme` (light/dark: localStorage `pol-theme` → `prefers-color-scheme` → dark).
+- `src/styles/global.css` — all styling; brand tokens are CSS custom properties in
+  `:root`, remapped by the `[data-theme='dark']` block for dark mode.
 - `public/images/` — photography. Replace a file (keep the name) and push to swap a photo.
 - `public/CNAME` — custom domain (proofoflife.bar); Vite copies it into `dist/`.
-- `index.html` — Vite entry; Google Fonts + counter.dev analytics live here.
+- `index.html` — Vite entry; Google Fonts, counter.dev analytics, and the pre-paint
+  theme script (sets `data-theme` before first paint — keep in sync with `useTheme`).
 
 ## Brand
 Palette: navy ground `#0E1B2E`, cream `#F4EAD5`, magenta accent `#E83F8C`
